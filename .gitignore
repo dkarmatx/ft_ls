@@ -5,3 +5,4 @@ a.out*
 *.a
 test.c
 .vscode
+testfolder

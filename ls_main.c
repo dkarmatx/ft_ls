@@ -6,13 +6,16 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 11:47:43 by hgranule          #+#    #+#             */
-/*   Updated: 2019/05/22 22:08:04 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/05/27 10:58:58 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls_inc.h"
 
+t_flags		g_flags;
+
 int		main(int ac, char **av)
 {
+
 	return (0);
 }
