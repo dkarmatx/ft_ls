@@ -6,7 +6,7 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 21:31:48 by hgranule          #+#    #+#             */
-/*   Updated: 2019/05/28 09:13:37 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/05/28 16:41:16 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include "ls_flags.h"
 # include "ls_input.h"
 # include "ls_error.h"
+# include "ls_sort.h"
+# include "ls_dirstream.h"
 
 # include <unistd.h>
 # include <sys/stat.h>
@@ -51,8 +53,8 @@ typedef enum		e_filetype
 
 typedef struct		s_fileinfo
 {
+	char			filename[1024];
 	struct stat		s_stat;
-	char			filename[256];
 	t_filetype		filetype;
 	int				is_xattr_acl;
 }					t_fileinfo;

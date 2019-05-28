@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls_input.h                                         :+:      :+:    :+:   */
+/*   ls_sort.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/28 01:52:41 by hgranule          #+#    #+#             */
-/*   Updated: 2019/05/28 15:38:41 by hgranule         ###   ########.fr       */
+/*   Created: 2019/05/28 15:28:54 by hgranule          #+#    #+#             */
+/*   Updated: 2019/05/28 17:04:46 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LS_INPUT_H
-# define LS_INPUT_H
+#ifndef LS_SORT_H
+# define LS_SORT_H
 
 # include "ls_inc.h"
 
-# define SUPPORTED_FALGS_COUNT 23
-
-int		ls_input_parser(t_flags *, t_dlist **, const int, const char **);
+int		ls_cmp_lex(void *a, void *b);
+int		ls_cmp_mtime(void *a, void *b);
+int		ls_cmp_atime(void *a, void *b);
+int		ls_cmp_size(void *a, void *b);
 
 #endif

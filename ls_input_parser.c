@@ -6,7 +6,7 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 01:49:37 by hgranule          #+#    #+#             */
-/*   Updated: 2019/05/28 11:42:43 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/05/28 16:51:51 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ static void		ls_flag_parser(t_flags *flags, const char *str_flag)
 static void		ls_file_parser(t_dlist **files, const char *argv)
 {
 	struct stat		stat;
+	t_fileinfo		file;
 	const int 		status = lstat(argv, &stat);
 	
 	if (status < 0)
@@ -68,20 +69,27 @@ static void		ls_file_parser(t_dlist **files, const char *argv)
 		ls_errno(argv);
 		return ;
 	}
-	ft_dlstpush(files, ft_dlstnew((void *)argv, ft_strlen(argv)));
+	ft_strcpy(file.filename, argv);
+	lstat(argv, &(file.s_stat));
+	ft_dlstpush(files, ft_dlstnew(&file, sizeof(t_fileinfo)));
 }
 
 int				ls_input_parser(t_flags *flags, t_dlist **files, const int ac, const char **av)
 {
 	char		**argv;
 	int			argc;
+	int			retu;
 
 	argv = (char **)av;
 	argc = (int)ac;
+	retu = 0;
 	while (*(++argv) && **(argv) == '-' && *(*(argv) + 1))
 		ls_flag_parser(flags, *argv);
 	--argv;
-	while (*(++argv))		
+	while (*(++argv))
+	{
+		++retu;
 		ls_file_parser(files, *argv);
-	return (0);
+	}
+	return (retu);
 }
