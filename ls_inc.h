@@ -6,17 +6,17 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 21:31:48 by hgranule          #+#    #+#             */
-/*   Updated: 2019/05/28 02:06:16 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/05/28 09:13:37 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LS_INC_H
 # define LS_INC_H
 
+# include "libft/includes/libft.h"
 # include "ls_flags.h"
 # include "ls_input.h"
 # include "ls_error.h"
-# include "libft.h"
 
 # include <unistd.h>
 # include <sys/stat.h>

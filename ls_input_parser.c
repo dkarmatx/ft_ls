@@ -6,7 +6,7 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 01:49:37 by hgranule          #+#    #+#             */
-/*   Updated: 2019/05/28 05:52:13 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/05/28 09:42:43 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,20 @@ static void		ls_flag_parser(t_flags *flags, const char *str_flag)
 		}
 }
 
-int				ls_input_parser(t_flags *flags, const int ac, const char **av)
+static void		ls_file_parser(t_dlist **files, const char *argv)
+{
+	struct stat		stat;
+	const int 		status = lstat(argv, &stat);
+	
+	if (status < 0)
+	{
+		ls_errno(argv);
+		return ;
+	}
+	ft_dlstpush(files, ft_dlstnew((void *)argv, ft_strlen(argv)));
+}
+
+int				ls_input_parser(t_flags *flags, t_dlist **files, const int ac, const char **av)
 {
 	char		**argv;
 	int			argc;
@@ -69,9 +82,6 @@ int				ls_input_parser(t_flags *flags, const int ac, const char **av)
 		ls_flag_parser(flags, *argv);
 	--argv;
 	while (*(++argv))
-	{
-		ft_putendl("i found arg :");
-		ft_putendl(*argv);
-	}
+		ls_file_parser(files, *argv);
 	return (0);
 }

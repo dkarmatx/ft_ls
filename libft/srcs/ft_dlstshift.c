@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls_main.c                                          :+:      :+:    :+:   */
+/*   ft_dlstshift.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/22 11:47:43 by hgranule          #+#    #+#             */
-/*   Updated: 2019/05/28 09:48:19 by hgranule         ###   ########.fr       */
+/*   Created: 2019/05/28 08:31:05 by hgranule          #+#    #+#             */
+/*   Updated: 2019/05/28 08:41:08 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ls_inc.h"
-#include <fcntl.h>
+#include "ft_dlist.h"
 
-t_flags		g_flags;
-t_dlist		*g_filestack;
-
-int		main(const int ac, const char **av)
+t_dlist		*ft_dlstshift(t_dlist **list)
 {
-	g_flags.general_flags = DRW_MCOL;
-	g_filestack = 0;
-	ls_input_parser(&g_flags, &g_filestack, ac, av);
-	return (0);
+	t_dlist		*lst;
+
+	if (!list || !(*list))
+		return (0);
+	if ((lst = *list)->next)
+	{
+		*list = lst->next;
+		lst->next->prev = 0;
+	}
+	return (lst);
 }
