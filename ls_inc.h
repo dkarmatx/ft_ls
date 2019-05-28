@@ -6,7 +6,7 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 21:31:48 by hgranule          #+#    #+#             */
-/*   Updated: 2019/05/27 10:57:54 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/05/28 02:06:16 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define LS_INC_H
 
 # include "ls_flags.h"
+# include "ls_input.h"
+# include "ls_error.h"
 # include "libft.h"
 
 # include <unistd.h>
@@ -24,10 +26,12 @@
 # include <grp.h>
 # include <time.h>
 # include <stdio.h>
+# include <stdlib.h>
 # include <string.h>
 # include <sys/xattr.h>
 # include <sys/acl.h>
 # include <uuid/uuid.h>
+# include <errno.h>
 
 # define FINFO_XATTR 0b01;
 # define FINFO_ACL 0b10;

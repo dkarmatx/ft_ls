@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls_main.c                                          :+:      :+:    :+:   */
+/*   ls_error.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/22 11:47:43 by hgranule          #+#    #+#             */
-/*   Updated: 2019/05/28 02:49:09 by hgranule         ###   ########.fr       */
+/*   Created: 2019/05/28 01:57:04 by hgranule          #+#    #+#             */
+/*   Updated: 2019/05/28 04:37:57 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ls_inc.h"
-#include <fcntl.h>
+#ifndef LS_ERROR_H
+# define LS_ERROR_H
 
-t_flags		g_flags;
+# include "ls_inc.h"
 
-int		main(const int ac, const char **av)
-{
-	ls_input_parser(&g_flags, ac, av); // Функция так-же будет менять переменную g_flags
-	return (0);
-}
+# define STDERR_FD STDERR_FILENO
+
+void		ls_errno_exit(void);
+void		ls_puterror_exit(const char *strer);
+
+#endif

@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls_main.c                                          :+:      :+:    :+:   */
+/*   ls_input.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/22 11:47:43 by hgranule          #+#    #+#             */
-/*   Updated: 2019/05/28 02:49:09 by hgranule         ###   ########.fr       */
+/*   Created: 2019/05/28 01:52:41 by hgranule          #+#    #+#             */
+/*   Updated: 2019/05/28 04:28:29 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ls_inc.h"
-#include <fcntl.h>
+#ifndef LS_INPUT_H
+# define LS_INPUT_H
 
-t_flags		g_flags;
+# include "ls_inc.h"
 
-int		main(const int ac, const char **av)
-{
-	ls_input_parser(&g_flags, ac, av); // Функция так-же будет менять переменную g_flags
-	return (0);
-}
+# define SUPPORTED_FALGS_COUNT 23
+
+int		ls_input_parser(t_flags *flags, const int argc, const char **sav);
+
+#endif
