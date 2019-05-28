@@ -6,7 +6,7 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 01:52:41 by hgranule          #+#    #+#             */
-/*   Updated: 2019/05/28 08:50:02 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/05/28 14:29:11 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@
 
 # define SUPPORTED_FALGS_COUNT 23
 
-int		ls_input_parser(t_flags *flags, t_dlist **file, const int argc, const char **sav);
+int		ls_input_parser(t_flags *, t_dlist **, const int, const char **);
 
 #endif

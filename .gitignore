@@ -1,4 +1,5 @@
 ft_ls.dSYM
+.DS_store
 ft_ls
 a.out*
 *.o

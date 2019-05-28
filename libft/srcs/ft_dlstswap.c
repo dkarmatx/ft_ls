@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls_main.c                                          :+:      :+:    :+:   */
+/*   ft_dlstswap.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/22 11:47:43 by hgranule          #+#    #+#             */
-/*   Updated: 2019/05/28 14:34:55 by hgranule         ###   ########.fr       */
+/*   Created: 2019/05/28 12:44:26 by hgranule          #+#    #+#             */
+/*   Updated: 2019/05/28 13:09:45 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ls_inc.h"
-#include <fcntl.h>
+#include "ft_dlist.h"
 
-t_flags		g_flags;
-t_dlist		*g_names;
-
-int		lol(void *a, void *b)
+void		ft_dlstswap(t_dlist *a, t_dlist *b)
 {
-	return(ft_strcmp(a, b));
-}
+	void		*tmpc;
+	size_t		tmps;
 
-int		main(const int ac, const char **av)
-{
-	g_flags.general_flags = DRW_MCOL;
-	g_names = 0;
-	ls_input_parser(&g_flags, &g_names, ac, av);
-
-	ft_dlst_rgnsort(&g_names, &lol);
-
-	return (0);
+	if (!a || !b)
+		return ;
+	tmpc = a->content;
+	tmps = a->size;
+	a->content = b->content;
+	a->size = b->size;
+	b->content = tmpc;
+	b->size = tmps;
 }

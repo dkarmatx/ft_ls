@@ -6,7 +6,7 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 01:49:37 by hgranule          #+#    #+#             */
-/*   Updated: 2019/05/28 09:42:43 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/05/28 11:42:43 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void		ls_apply_flag(t_flags *flags, const char flag, int off)
 	if (flag == '1' || flag == 'l' || flag == 'C')
 		flags->view_flags = (t_1b)g_applyv[off];
 	else if (flag == 'd' || flag == 'R')
-		flags->general_flags |= (t_1b)g_applyv[off];
+		flags->general_flags = (t_1b)g_applyv[off];
 	else if (flag == 'r' || flag == 't' || flag == 'u' || flag == 'f' \
 	|| flag == 'S')
 		flags->sort_flags |= g_applyv[off];
@@ -81,7 +81,7 @@ int				ls_input_parser(t_flags *flags, t_dlist **files, const int ac, const char
 	while (*(++argv) && **(argv) == '-' && *(*(argv) + 1))
 		ls_flag_parser(flags, *argv);
 	--argv;
-	while (*(++argv))
+	while (*(++argv))		
 		ls_file_parser(files, *argv);
 	return (0);
 }
