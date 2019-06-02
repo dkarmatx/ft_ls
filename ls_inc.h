@@ -6,7 +6,7 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 21:31:48 by hgranule          #+#    #+#             */
-/*   Updated: 2019/06/02 04:47:46 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/02 13:50:21 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <sys/acl.h>
 # include <uuid/uuid.h>
 # include <errno.h>
+# include <sys/ioctl.h>
 
 # include "libft/includes/libft.h"
 # include "ls_flags.h"
@@ -34,9 +35,11 @@
 # include "ls_error.h"
 # include "ls_sort.h"
 # include "ls_fileinfo.h"
+# include "ls_format.h"
 
-t_flags		g_flags;
-t_dlist		*g_args;
-t_dlist		*g_files;
+t_flags				g_flags;
+t_dlist				*g_args;
+t_dlist				*g_files;
+struct winsize 		term;
 
 #endif

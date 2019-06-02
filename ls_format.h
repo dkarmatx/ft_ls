@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls_sort.h                                          :+:      :+:    :+:   */
+/*   ls_format.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/28 15:28:54 by hgranule          #+#    #+#             */
-/*   Updated: 2019/06/02 10:41:44 by hgranule         ###   ########.fr       */
+/*   Created: 2019/06/02 10:37:01 by hgranule          #+#    #+#             */
+/*   Updated: 2019/06/02 13:57:58 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LS_SORT_H
-# define LS_SORT_H
+#ifndef LS_FORMAT_H
+# define LS_FORMAT_H
 
 # include "ls_inc.h"
 
-int		ls_cmp_lex(void *a, void *b);
-int		ls_cmp_mtime(void *a, void *b);
-int		ls_cmp_atime(void *a, void *b);
-int		ls_cmp_size(void *a, void *b);
-int		ls_cmp_dirafter(void *a, void *b);
+# define TABSIZE 8;
+
+void		ls_putfile(t_fileinfo *file);
+void		ls_putdir(t_fileinfo *dir);
 
 #endif
