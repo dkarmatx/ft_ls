@@ -6,19 +6,12 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 21:31:48 by hgranule          #+#    #+#             */
-/*   Updated: 2019/05/28 16:41:16 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/02 04:47:46 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LS_INC_H
 # define LS_INC_H
-
-# include "libft/includes/libft.h"
-# include "ls_flags.h"
-# include "ls_input.h"
-# include "ls_error.h"
-# include "ls_sort.h"
-# include "ls_dirstream.h"
 
 # include <unistd.h>
 # include <sys/stat.h>
@@ -35,28 +28,15 @@
 # include <uuid/uuid.h>
 # include <errno.h>
 
-# define FINFO_XATTR 0b01;
-# define FINFO_ACL 0b10;
+# include "libft/includes/libft.h"
+# include "ls_flags.h"
+# include "ls_input.h"
+# include "ls_error.h"
+# include "ls_sort.h"
+# include "ls_fileinfo.h"
 
-typedef enum		e_filetype
-{
-	unknown = 0,
-	fifo = S_IFIFO,
-	chardev = S_IFCHR,
-	directory = S_IFDIR,
-	blockdev = S_IFBLK,
-	regular = S_IFREG,
-	slink = S_IFLNK,
-	socket = S_IFSOCK,
-	whiteout = S_IFWHT
-}					t_filetype;
-
-typedef struct		s_fileinfo
-{
-	char			filename[1024];
-	struct stat		s_stat;
-	t_filetype		filetype;
-	int				is_xattr_acl;
-}					t_fileinfo;
+t_flags		g_flags;
+t_dlist		*g_args;
+t_dlist		*g_files;
 
 #endif

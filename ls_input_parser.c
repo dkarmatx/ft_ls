@@ -6,7 +6,7 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 01:49:37 by hgranule          #+#    #+#             */
-/*   Updated: 2019/05/28 16:51:51 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/02 04:49:28 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,24 @@ const t_2b		g_applyv[] = {
 	CUSTM_GB, CUSTM_FB, CUSTM_LB, CUSTM_AB,
 	CUSTM_A_, CUSTM_I_, CUSTM_S_ };
 
-static void		ls_apply_flag(t_flags *flags, const char flag, int off)
+static void		ls_apply_flag(const char flag, int off)
 {
 	if (flag == '1' || flag == 'l' || flag == 'C')
-		flags->view_flags = (t_1b)g_applyv[off];
+		g_flags.view_flags = (t_1b)g_applyv[off];
 	else if (flag == 'd' || flag == 'R')
-		flags->general_flags = (t_1b)g_applyv[off];
+		g_flags.general_flags = (t_1b)g_applyv[off];
 	else if (flag == 'r' || flag == 't' || flag == 'u' || flag == 'f' \
 	|| flag == 'S')
-		flags->sort_flags |= g_applyv[off];
+		g_flags.sort_flags |= g_applyv[off];
 	else if (flag == 'T' || flag == 'e' || flag == '@' || flag == 'g' \
 	|| flag == 'h' || flag == 'n')
-		flags->addlf_flags |= g_applyv[off];
+		g_flags.addlf_flags |= g_applyv[off];
 	else if (flag == 'i' || flag == 's' || flag == 'G' || flag == 'F' \
 	|| flag == 'L' || flag == 'A' || flag == 'a')
-		flags->custom_flags |= g_applyv[off];
+		g_flags.custom_flags |= g_applyv[off];
 }
 
-static void		ls_flag_parser(t_flags *flags, const char *str_flag)
+static void		ls_flag_parser(const char *str_flag)
 {
 	char	*iter;
 	char	*off;
@@ -46,7 +46,7 @@ static void		ls_flag_parser(t_flags *flags, const char *str_flag)
 	iter = (char *)str_flag;
 	while (*(++iter))
 		if ((off = (char *)ft_memchr(g_applyf, *iter, SUPPORTED_FALGS_COUNT)))
-			ls_apply_flag(flags, *iter, (int)(off - g_applyf));
+			ls_apply_flag(*iter, (int)(off - g_applyf));
 		else
 		{
 			ft_putstr_fd("ft_ls: illegal option -- ", STDERR_FD);
@@ -58,23 +58,21 @@ static void		ls_flag_parser(t_flags *flags, const char *str_flag)
 		}
 }
 
-static void		ls_file_parser(t_dlist **files, const char *argv)
+static void		ls_file_parser(const char *argv)
 {
-	struct stat		stat;
 	t_fileinfo		file;
-	const int 		status = lstat(argv, &stat);
+	int 			status;
 	
-	if (status < 0)
+	status = ls_get_fileinfo(&file, (char *)argv, (char *)argv);
+	if (status == 0)
 	{
 		ls_errno(argv);
 		return ;
 	}
-	ft_strcpy(file.filename, argv);
-	lstat(argv, &(file.s_stat));
-	ft_dlstpush(files, ft_dlstnew(&file, sizeof(t_fileinfo)));
+	ft_dlstpush(&g_args, ft_dlstnew(&file, sizeof(t_fileinfo)));
 }
 
-int				ls_input_parser(t_flags *flags, t_dlist **files, const int ac, const char **av)
+int				ls_input_parser(const int ac, const char **av)
 {
 	char		**argv;
 	int			argc;
@@ -84,12 +82,12 @@ int				ls_input_parser(t_flags *flags, t_dlist **files, const int ac, const char
 	argc = (int)ac;
 	retu = 0;
 	while (*(++argv) && **(argv) == '-' && *(*(argv) + 1))
-		ls_flag_parser(flags, *argv);
+		ls_flag_parser(*argv);
 	--argv;
 	while (*(++argv))
 	{
 		++retu;
-		ls_file_parser(files, *argv);
+		ls_file_parser(*argv);
 	}
 	return (retu);
 }

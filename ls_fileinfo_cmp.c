@@ -6,7 +6,7 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 15:23:50 by hgranule          #+#    #+#             */
-/*   Updated: 2019/05/28 17:09:01 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/02 06:12:24 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,20 @@
 ** Where a - pointer to *a and *b list content.
 ** It must return 0+ (a > b) ; 0- (a < b) ; 0 (a == b)
 */
+
+int		ls_cmp_dirafter(void *a, void *b)
+{
+	t_fileinfo		*tfa;
+	t_fileinfo		*tfb;
+
+	tfa = a;
+	tfb = b;
+	if (tfa->filetype == directory)
+		return (1);
+	if (tfb->filetype == directory)
+		return (-1);
+	return (0);
+}
 
 int		ls_cmp_lex(void *a, void *b)
 {

@@ -6,34 +6,32 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 11:47:43 by hgranule          #+#    #+#             */
-/*   Updated: 2019/05/28 17:10:29 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/02 10:35:03 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls_inc.h"
 #include <fcntl.h>
 
-t_flags		g_flags;
-t_dlist		*g_goals;
-
-int		lol(void *a, void *b)
-{
-	return(ft_strcmp(a, b));
-}
-
 int		main(const int ac, const char **av)
 {
-	int		status;
+	int			status;
+	t_dlist		*cur;
+	t_fileinfo	dotfile;
 
-	g_flags.general_flags = DRW_MCOL;
-	g_goals = 0;
-	if ((status = ls_input_parser(&g_flags, &g_goals, ac, av) < 1) && !g_goals)
-		g_goals = ft_dlstnew(".", 2);
-	ft_dlst_gnsort(&g_goals, &ls_cmp_atime); // NOTE Сортировка по времени работает по размеру тоже и по лексике
-	while (g_goals) // продумать всю хуйню
+	g_flags.view_flags = DRW_MCOL;
+	g_args = 0;
+	if ((status = ls_input_parser(ac, av) < 1) && !g_args)
 	{
-		ft_putendl(g_goals->content);
-		ft_dlstshift(&g_goals);
+		ls_get_fileinfo(&dotfile, "", ".");
+		g_args = ft_dlstnew(&dotfile, sizeof(t_fileinfo));
+	}
+	cur = g_args;
+	ft_dlst_rgnsort(&g_args, &ls_cmp_lex);
+	ft_dlst_gnsort(&g_args, &ls_cmp_dirafter);
+	while (cur)
+	{
+		
 	}
 	return (0);
 }
