@@ -6,20 +6,20 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 01:49:37 by hgranule          #+#    #+#             */
-/*   Updated: 2019/06/07 07:57:20 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/07 16:15:42 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls_inc.h"
 
-const char		g_applyf[] = "1lCRdrtufSTe@ghnGFLAais";
+const char		g_applyf[] = "1lCRdrtufSe@ghGFLAais";
 const t_2b		g_applyv[] = {
 	DRW_1COL, DRW_LCOL, DRW_MCOL, RECUR_LS,
 	DIR_ASFI, SORTI_R_, SORTI_T_, SORTI_U_,
-	SORTI_F_, SORTI_SB, ADDLF_TB, ADDLF_E_,
-	ADDLF_AA, ADDLF_G_, ADDLF_H_, ADDLF_N_,
-	CUSTM_GB, CUSTM_FB, CUSTM_LB, CUSTM_AB,
-	CUSTM_A_, CUSTM_I_, CUSTM_S_ };
+	SORTI_F_, SORTI_SB, ADDLF_E_, ADDLF_AA,
+	ADDLF_G_, ADDLF_H_,	CUSTM_GB, CUSTM_FB,
+	CUSTM_LB, CUSTM_AB,	CUSTM_A_, CUSTM_I_,
+	CUSTM_S_ };
 
 static void		ls_apply_flag(const char flag, int off)
 {
@@ -30,8 +30,8 @@ static void		ls_apply_flag(const char flag, int off)
 	else if (flag == 'r' || flag == 't' || flag == 'u' || flag == 'f' \
 	|| flag == 'S')
 		g_flags.sort_flags |= g_applyv[off];
-	else if (flag == 'T' || flag == 'e' || flag == '@' || flag == 'g' \
-	|| flag == 'h' || flag == 'n')
+	else if (flag == 'e' || flag == '@' || flag == 'g' \
+	|| flag == 'h')
 		g_flags.addlf_flags |= g_applyv[off];
 	else if (flag == 'i' || flag == 's' || flag == 'G' || flag == 'F' \
 	|| flag == 'L' || flag == 'A' || flag == 'a')

@@ -6,7 +6,7 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 01:52:41 by hgranule          #+#    #+#             */
-/*   Updated: 2019/06/07 08:08:59 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/07 16:15:15 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "ls_inc.h"
 
-# define SUPPORTED_FALGS_COUNT 23
+# define SUPPORTED_FALGS_COUNT 21
 
 int		ls_input_parser(const int ac, const char **av);
 

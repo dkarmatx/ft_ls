@@ -6,7 +6,7 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 15:23:50 by hgranule          #+#    #+#             */
-/*   Updated: 2019/06/02 06:12:24 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/07 15:08:57 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int		ls_cmp_atime(void *a, void *b)
 {
 	struct stat		sa;
 	struct stat		sb;
-	int				ret;
 
 	sb = ((t_fileinfo *)b)->s_stat;
 	sa = ((t_fileinfo *)a)->s_stat;
@@ -62,7 +61,6 @@ int		ls_cmp_mtime(void *a, void *b)
 {
 	struct stat		sa;
 	struct stat		sb;
-	int				ret;
 
 	sb = ((t_fileinfo *)b)->s_stat;
 	sa = ((t_fileinfo *)a)->s_stat;
@@ -77,7 +75,6 @@ int		ls_cmp_size(void *a, void *b)
 {
 	struct stat		sa;
 	struct stat		sb;
-	int				ret;
 
 	sb = ((t_fileinfo *)b)->s_stat;
 	sa = ((t_fileinfo *)a)->s_stat;

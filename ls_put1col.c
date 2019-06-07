@@ -6,38 +6,58 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 20:46:19 by hgranule          #+#    #+#             */
-/*   Updated: 2019/06/07 08:04:59 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/07 13:12:19 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls_inc.h"
 
-void		ls_st_1col_f_scan(struct s_1col_f *frmt)
+char		*ls_catcolor(char *start, t_fileinfo *file)
+{
+	if (g_flags.custom_flags & CUSTM_GB)
+	{
+		if (file->filetype == directory || file->filetype == argdir)
+			start = ls_strcat(start, "\033[1;38;2;0;100;240m");
+		else if (file->filetype == socket || file->filetype == fifo)
+			start = ls_strcat(start, "\033[1;38;2;255;127;0m");
+		else if (file->filetype == slink)
+			start = ls_strcat(start, "\033[1;38;2;0;193;0m");
+		else if (file->filetype == chardev || file->filetype == blockdev)
+			start = ls_strcat(start, "\033[1;38;2;235;218;0m");
+		else if (file->filetype == whiteout)
+			start = ls_strcat(start, "\033[1;38;2;205;84;174m");
+		else if (file->filetype == regular && (file->s_stat.st_mode & 0111))
+			start = ls_strcat(start, "\033[1;38;2;230;0;0m");
+	}
+	return (start);
+}
+
+void		ls_st_1col_f_scan(struct s_1col_f *f)
 {
 	t_dlist				*put;
 	int					flag;
 
 	put = g_files;
-	ft_bzero(frmt, sizeof(struct s_1col_f));
+	ft_bzero(f, sizeof(struct s_1col_f));
 	flag = 0;
 	(g_flags.custom_flags & (CUSTM_I_ | CUSTM_S_)) ? flag = 1 : flag;
 	while (put && flag)
 	{
 		if (g_flags.custom_flags & CUSTM_I_)
-			if (frmt->indmax < ((t_fileinfo *)put->content)->s_stat.st_ino)
-				frmt->indmax = ((t_fileinfo *)put->content)->s_stat.st_ino;
+			if ((size_t)f->imax < ((t_fileinfo *)put->content)->s_stat.st_ino)
+				f->imax = ((t_fileinfo *)put->content)->s_stat.st_ino;
 		if (g_flags.custom_flags & CUSTM_S_)
 		{
-			frmt->total += ((t_fileinfo *)put->content)->s_stat.st_blocks;
-			if (frmt->bmax < ((t_fileinfo *)put->content)->s_stat.st_blocks)
-				frmt->bmax = ((t_fileinfo *)put->content)->s_stat.st_blocks;
+			f->total += ((t_fileinfo *)put->content)->s_stat.st_blocks;
+			if (f->bmax < ((t_fileinfo *)put->content)->s_stat.st_blocks)
+				f->bmax = ((t_fileinfo *)put->content)->s_stat.st_blocks;
 		}
 		put = put->next;
 	}
 	if (g_flags.custom_flags & CUSTM_I_)
-		frmt->indmax = ls_get_decs(frmt->indmax);
+		f->imax = ls_get_decs(f->imax);
 	if (g_flags.custom_flags & CUSTM_S_)
-		frmt->bmax = ls_get_decs(frmt->bmax);
+		f->bmax = ls_get_decs(f->bmax);
 }
 
 char		*ls_catind(int len, char *start, t_fileinfo *file)

@@ -6,7 +6,7 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 15:36:50 by hgranule          #+#    #+#             */
-/*   Updated: 2019/06/07 08:09:46 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/07 08:54:37 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ t_filetype			ls_get_filetype(mode_t mode);
 int					ls_get_fileinfo(t_fileinfo *info, char *name, char *path);
 t_dlist				*ls_get_filelist(char *path);
 char				*ls_ret_base_from_path(char *path);
+void				ls_it_stk(t_dlist *before, t_dlist **begin, t_dlist *inj);
 
 #endif

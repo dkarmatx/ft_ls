@@ -6,12 +6,30 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 11:47:43 by hgranule          #+#    #+#             */
-/*   Updated: 2019/06/07 07:56:11 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/07 11:42:58 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls_inc.h"
 #include <fcntl.h>
+
+static void				ls_recursive_power(void)
+{
+	t_dlist		*insert;
+	t_dlist		*cur;
+	t_fileinfo	*finfo;
+
+	insert = g_args;
+	cur = g_files;
+	while (cur)
+	{
+		finfo = cur->content;
+		if (g_flags.general_flags == RECUR_LS && finfo->filetype == directory \
+		&& ft_strcmp(finfo->filename, ".") && ft_strcmp(finfo->filename, ".."))
+			ls_it_stk(insert, &g_args, ft_dlstnew(finfo, sizeof(t_fileinfo)));
+		cur = cur->next;
+	}
+}
 
 static inline void		ls_g_files_init(void)
 {
@@ -39,8 +57,6 @@ static inline void		ls_putfoldername(void)
 
 static inline void		ls_mainloop(void)
 {
-	t_dlist		*del;
-	t_dlist		*huinya;
 	char		path[1024];
 
 	ls_putfoldername();
@@ -50,6 +66,7 @@ static inline void		ls_mainloop(void)
 	if (g_files)
 	{
 		ls_sort_files();
+		ls_recursive_power();
 		ls_putfiles();
 	}
 	ft_dlstdel(&g_files, (size_t)-1);

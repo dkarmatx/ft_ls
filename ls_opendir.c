@@ -6,13 +6,13 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 09:22:45 by hgranule          #+#    #+#             */
-/*   Updated: 2019/06/07 08:00:37 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/07 09:01:38 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls_inc.h"
 
-static void	ls_it_stk(t_dlist *before, t_dlist **begin, t_dlist *inject)
+void		ls_it_stk(t_dlist *before, t_dlist **begin, t_dlist *inject)
 {
 	if (!(*begin))
 		*begin = inject;
@@ -29,7 +29,7 @@ static void	ls_it_stk(t_dlist *before, t_dlist **begin, t_dlist *inject)
 	}
 }
 
-static void	ls_rdir_looker(t_dlist **files, t_dlist **insert, \
+static void	ls_rdir_looker(t_dlist **files, \
 struct dirent *cur_f, char *path)
 {
 	t_fileinfo		finfo;
@@ -45,16 +45,12 @@ struct dirent *cur_f, char *path)
 	if (!(g_flags.custom_flags & CUSTM_A_) && \
 	(!ft_strcmp(finfo.filename, ".") || !ft_strcmp(finfo.filename, "..")))
 		return ;
-	if (g_flags.general_flags == RECUR_LS && finfo.filetype == directory \
-	&& ft_strcmp(finfo.filename, ".") && ft_strcmp(finfo.filename, ".."))
-		ls_it_stk(*insert, &g_args, ft_dlstnew(&finfo, sizeof(t_fileinfo)));
 	ft_dlstpush(files, ft_dlstnew(&finfo, sizeof(t_fileinfo)));
 }
 
 t_dlist		*ls_get_filelist(char *path)
 {
 	t_dlist			*files;
-	t_dlist			*insert;
 	DIR				*dir;
 	struct dirent	*cur_f;
 
@@ -63,10 +59,9 @@ t_dlist		*ls_get_filelist(char *path)
 		ls_errno(ls_ret_base_from_path(path));
 		return (0);
 	}
-	insert = g_args;
 	files = 0;
 	while ((cur_f = readdir(dir)))
-		ls_rdir_looker(&files, &insert, cur_f, path);
+		ls_rdir_looker(&files, cur_f, path);
 	closedir(dir);
 	return (files);
 }

@@ -6,7 +6,7 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 16:46:35 by hgranule          #+#    #+#             */
-/*   Updated: 2019/05/28 05:42:57 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/07 16:13:27 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ typedef struct			s_inputflags
 # define SORTI_F_ (t_2b)0b00010
 # define SORTI_SB (t_2b)0b00001
 
-# define ADDLF_TB (t_2b)0b100000
-# define ADDLF_E_ (t_2b)0b010000
-# define ADDLF_AA (t_2b)0b001000
-# define ADDLF_G_ (t_2b)0b000100
-# define ADDLF_H_ (t_2b)0b000010
-# define ADDLF_N_ (t_2b)0b000001
+// # define ADDLF_TB (t_2b)0b100000
+# define ADDLF_E_ (t_2b)0b1000
+# define ADDLF_AA (t_2b)0b0100
+# define ADDLF_G_ (t_2b)0b0010
+# define ADDLF_H_ (t_2b)0b0001
+// # define ADDLF_N_ (t_2b)0b000001
 
 # define CUSTM_I_ (t_2b)0b1000000
 # define CUSTM_S_ (t_2b)0b0100000
