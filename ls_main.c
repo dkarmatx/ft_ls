@@ -6,7 +6,7 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 11:47:43 by hgranule          #+#    #+#             */
-/*   Updated: 2019/06/07 05:59:54 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/07 07:56:11 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static inline void		ls_g_files_init(void)
 		}
 }
 
-static inline void		ls_putfoldername()
+static inline void		ls_putfoldername(void)
 {
 	if (g_mf)
 	{

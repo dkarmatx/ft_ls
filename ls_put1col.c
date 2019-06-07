@@ -6,7 +6,7 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 20:46:19 by hgranule          #+#    #+#             */
-/*   Updated: 2019/06/07 00:23:16 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/07 08:04:59 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,33 @@
 
 void		ls_st_1col_f_scan(struct s_1col_f *frmt)
 {
-	t_dlist				*putter;
+	t_dlist				*put;
 	int					flag;
 
-	putter = g_files;
-	frmt->blocks_max = 0;
-	frmt->inode_max = 0;
-	frmt->total = 0;
+	put = g_files;
+	ft_bzero(frmt, sizeof(struct s_1col_f));
 	flag = 0;
 	(g_flags.custom_flags & (CUSTM_I_ | CUSTM_S_)) ? flag = 1 : flag;
-	while (putter && flag)
+	while (put && flag)
 	{
 		if (g_flags.custom_flags & CUSTM_I_)
-			if (frmt->inode_max < ((t_fileinfo *)putter->content)->s_stat.st_ino)
-				frmt->inode_max = ((t_fileinfo *)putter->content)->s_stat.st_ino;
+			if (frmt->indmax < ((t_fileinfo *)put->content)->s_stat.st_ino)
+				frmt->indmax = ((t_fileinfo *)put->content)->s_stat.st_ino;
 		if (g_flags.custom_flags & CUSTM_S_)
 		{
-			frmt->total += ((t_fileinfo *)putter->content)->s_stat.st_blocks;
-			if (frmt->blocks_max < ((t_fileinfo *)putter->content)->s_stat.st_blocks)
-				frmt->blocks_max = ((t_fileinfo *)putter->content)->s_stat.st_blocks;
+			frmt->total += ((t_fileinfo *)put->content)->s_stat.st_blocks;
+			if (frmt->bmax < ((t_fileinfo *)put->content)->s_stat.st_blocks)
+				frmt->bmax = ((t_fileinfo *)put->content)->s_stat.st_blocks;
 		}
-		putter = putter->next;
+		put = put->next;
 	}
 	if (g_flags.custom_flags & CUSTM_I_)
-		frmt->inode_max = ls_get_decs(frmt->inode_max);
+		frmt->indmax = ls_get_decs(frmt->indmax);
 	if (g_flags.custom_flags & CUSTM_S_)
-		frmt->blocks_max = ls_get_decs(frmt->blocks_max);
+		frmt->bmax = ls_get_decs(frmt->bmax);
 }
 
-char		*ls_catinode(int len, char *start , t_fileinfo *file)
+char		*ls_catind(int len, char *start, t_fileinfo *file)
 {
 	const char	*inode = ls_n2s_rformat(file->s_stat.st_ino, len, ' ');
 
@@ -52,7 +50,7 @@ char		*ls_catinode(int len, char *start , t_fileinfo *file)
 	return (start);
 }
 
-char		*ls_catblcksize(int len, char *start , t_fileinfo *file)
+char		*ls_catbsz(int len, char *start, t_fileinfo *file)
 {
 	const char	*size = ls_n2s_rformat(file->s_stat.st_blocks, len, ' ');
 

@@ -6,7 +6,7 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 01:49:37 by hgranule          #+#    #+#             */
-/*   Updated: 2019/06/02 04:49:28 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/07 07:57:20 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ static void		ls_flag_parser(const char *str_flag)
 static void		ls_file_parser(const char *argv)
 {
 	t_fileinfo		file;
-	int 			status;
-	
+	int				status;
+
 	status = ls_get_fileinfo(&file, (char *)argv, (char *)argv);
 	if (status == 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 01:57:04 by hgranule          #+#    #+#             */
-/*   Updated: 2019/05/28 09:24:45 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/07 08:06:34 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # define STDERR_FD STDERR_FILENO
 
 void		ls_errno_exit(void);
-void		ls_puterror_exit(const char *);
-void		ls_perrno_exit(char const *);
-void		ls_errno(const char *);
+void		ls_puterror_exit(const char *strerr);
+void		ls_perrno_exit(char const *strerr);
+void		ls_errno(const char *strerr);
 
 #endif

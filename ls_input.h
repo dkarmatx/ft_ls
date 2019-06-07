@@ -6,7 +6,7 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 01:52:41 by hgranule          #+#    #+#             */
-/*   Updated: 2019/06/01 20:52:01 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/07 08:08:59 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@
 
 # define SUPPORTED_FALGS_COUNT 23
 
-int		ls_input_parser(const int, const char **);
+int		ls_input_parser(const int ac, const char **av);
 
 #endif

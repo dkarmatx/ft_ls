@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ls_inc.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgranule <@student.21-school.ru>           +#+  +:+       +#+        */
+/*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 21:31:48 by hgranule          #+#    #+#             */
-/*   Updated: 2019/06/04 15:18:55 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/07 08:07:03 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ t_flags				g_flags;
 t_dlist				*g_args;
 t_dlist				*g_files;
 int					g_mf;
-struct winsize 		term;
+struct winsize		term;
 
 #endif
