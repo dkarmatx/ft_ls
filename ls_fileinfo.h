@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ls_fileinfo.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgranule <@student.21-school.ru>           +#+  +:+       +#+        */
+/*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 15:36:50 by hgranule          #+#    #+#             */
-/*   Updated: 2019/06/04 15:18:50 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/07 04:42:40 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ typedef struct		s_fileinfo
 t_filetype		ls_get_filetype(mode_t mode);
 int				ls_get_fileinfo(t_fileinfo *info, char *name, char *path);
 t_dlist			*ls_get_filelist(char *path);
+char			*ls_ret_base_from_path(char *path);
 
 #endif

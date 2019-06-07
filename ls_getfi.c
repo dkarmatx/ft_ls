@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ls_getfi.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hgranule <@student.21-school.ru>           +#+  +:+       +#+        */
+/*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/30 19:51:30 by hgranule          #+#    #+#             */
-/*   Updated: 2019/06/04 17:37:47 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/07 04:43:53 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls_inc.h"
+
+char			*ls_ret_base_from_path(char *path)
+{
+	char		*base;
+
+	base = ft_strrchr(path, '/');
+	if (!base)
+		return (path);
+	return (base + 1);
+}
 
 t_filetype		ls_get_filetype(mode_t mode)
 {

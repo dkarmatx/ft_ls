@@ -6,7 +6,7 @@
 #    By: hgranule <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/02 20:36:01 by hgranule          #+#    #+#              #
-#    Updated: 2019/05/28 14:06:52 by hgranule         ###   ########.fr        #
+#    Updated: 2019/06/06 19:36:35 by hgranule         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,11 +89,10 @@ STRING =		ft_strnew ft_strdup ft_strchr \
 
 all: $(NAME)
 
-$(NAME):
-	@make o_dir;
-	@make $(ALL_O);
+$(NAME): $(ALL_O)
 	@ar rc $(NAME) $(ALL_O);
 	@ranlib $(NAME);
+	@echo "\n\033[1m\033[38;2;0;255;0m$@ is compiled\033[0m\n";
 
 o_dir:
 	@if ! [ -d $(O_DIR) ]; then mkdir $(O_DIR); fi;
@@ -102,6 +101,7 @@ a_dir: o_dir
 	@if ! [ -d $(A_DIR) ]; then mkdir $(A_DIR); fi;
 
 $(O_DIR)/%.o: $(C_DIR)/%.c
+	@make o_dir
 	@echo "\033[1m\033[38;2;255;255;0mCompiling : \033[7m$<\033[0m\033[1m\033[38;2;255;255;0m <<\033[0m";
 	@$(CC) $(CCFLAGS) -c $< -o $@ -I$(H_DIR); 
 
