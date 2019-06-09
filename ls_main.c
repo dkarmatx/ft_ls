@@ -6,7 +6,7 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 11:47:43 by hgranule          #+#    #+#             */
-/*   Updated: 2019/06/07 11:42:58 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/08 21:27:16 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int						main(const int ac, const char **av)
 		ls_get_fileinfo(&dotfile, ".", ".");
 		g_args = ft_dlstnew(&dotfile, sizeof(t_fileinfo));
 	}
-	if (g_args->next == 0 && g_args->prev == 0)
+	if (g_args && g_args->next == 0 && g_args->prev == 0)
 		g_mf = 0;
 	ls_sort_arguments();
 	ls_g_files_init();

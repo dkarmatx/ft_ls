@@ -6,7 +6,7 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 01:49:27 by hgranule          #+#    #+#             */
-/*   Updated: 2019/06/07 17:21:11 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/09 15:21:14 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,11 @@ static void			ls_putfiles_1col(void)
 		tmp = ls_cattotal(tmp, frmt.total);
 	while (put)
 	{
-		if (frmt.imax)
-			tmp = ls_catind(frmt.imax, tmp, (t_fileinfo *)put->content);
-		if (frmt.bmax)
-			tmp = ls_catbsz(frmt.bmax, tmp, (t_fileinfo *)put->content);
+		tmp = ls_catind(frmt.imax, tmp, (t_fileinfo *)put->content);
+		tmp = ls_catbsz(frmt.bmax, tmp, (t_fileinfo *)put->content);
 		tmp = ls_catcolor(tmp, (t_fileinfo *)put->content);
 		tmp = ls_strcat(tmp, ((t_fileinfo *)put->content)->filename);
-		tmp = ls_strcat(tmp, "\033[0m");
+		g_flags.custom_flags & CUSTM_GB ? (tmp = ls_strcat(tmp, "\033[0m")) : 0;
 		tmp = ls_cattypesym(tmp, (t_fileinfo *)put->content);
 		tmp = ls_strcat(tmp, "\n");
 		put = put->next;
@@ -69,19 +67,10 @@ static void			ls_putfiles_lcol(void)
 	put = g_files;
 	buff[0] = '\0';
 	tmp = buff;
-	if (frmt.bmax)
-		tmp = ls_cattotal(tmp, frmt.total);
+	tmp = ls_cattotal(tmp, frmt.total);
 	while (put)
 	{
-		if (frmt.imax)
-			tmp = ls_catind(frmt.imax, tmp, (t_fileinfo *)put->content);
-		if (frmt.bmax)
-			tmp = ls_catbsz(frmt.bmax, tmp, (t_fileinfo *)put->content);
-		tmp = ls_catcolor(tmp, (t_fileinfo *)put->content);
-		tmp = ls_strcat(tmp, ((t_fileinfo *)put->content)->filename);
-		tmp = ls_strcat(tmp, "\033[0m");
-		tmp = ls_cattypesym(tmp, (t_fileinfo *)put->content);
-		tmp = ls_strcat(tmp, "\n");
+		tmp = ls_putfile_lcol(tmp, put->content, &frmt);
 		put = put->next;
 	}
 	ft_putstr(buff);
@@ -96,6 +85,7 @@ void				ls_putfiles(void)
 	else if (g_flags.view_flags == DRW_LCOL)
 		ls_putfiles_lcol();
 }
+ 
 /*
 ** inode  bs  access   lns  uid      gid   bytes data          name
 ** 837165 8 -rw-r--r--_ 1 hgranule  2019   975B 28 May 14:27 ft_toupper.c

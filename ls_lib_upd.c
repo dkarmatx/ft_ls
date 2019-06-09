@@ -6,7 +6,7 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 22:01:07 by hgranule          #+#    #+#             */
-/*   Updated: 2019/06/06 23:25:06 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/09 14:16:00 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,35 @@ char	*ls_strcat(char *a, const char *b)
 	return (a + len + len1);
 }
 
-char	*ls_n2s_rformat(size_t a, int len, char filler)
+char	*ls_strcat_lfrt(char *st, int len, char filler, char *str)
 {
-	char	*numberic;
+	char	*tst;
+
+	if (!(tst = ls_strcat(st, str)))
+		return (0);
+	if ((size_t)tst < (size_t)(st + len))
+		ft_memset(tst, filler, (st - tst) + len);
+	st[len] = 0;
+	return (st + len);
+}
+
+char	*ls_n2s_rformat(size_t a, int len, char filler, char *st)
+{
 	int		ind;
 
-	if ((numberic = (char *)malloc(len + 1)))
+	if (st)
 	{
 		ind = len;
-		ft_memset(numberic, filler, len);
-		numberic[ind] = 0;
+		ft_memset(st, filler, len);
+		st[ind] = 0;
 		if (!a)
-			numberic[ind - 1] = '0';
+			st[ind - 1] = '0';
 		while (a && --ind > -1)
 		{
-			numberic[ind] = (a % 10) + 48;
+			st[ind] = (a % 10) + 48;
 			a /= 10;
 		}
+		st[len] = 0;
 	}
-	return (numberic);
+	return (st + len);
 }

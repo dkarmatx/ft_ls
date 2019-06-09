@@ -6,7 +6,7 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 20:46:19 by hgranule          #+#    #+#             */
-/*   Updated: 2019/06/07 13:12:19 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/09 05:03:51 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,21 +62,22 @@ void		ls_st_1col_f_scan(struct s_1col_f *f)
 
 char		*ls_catind(int len, char *start, t_fileinfo *file)
 {
-	const char	*inode = ls_n2s_rformat(file->s_stat.st_ino, len, ' ');
 
-	start = ls_strcat(start, inode);
-	start = ls_strcat(start, " ");
-	free((void *)inode);
+	if (g_flags.custom_flags & CUSTM_I_)
+	{
+		start = ls_n2s_rformat(file->s_stat.st_ino, len, ' ', start);
+		start = ls_strcat(start, " ");
+	}
 	return (start);
 }
 
 char		*ls_catbsz(int len, char *start, t_fileinfo *file)
 {
-	const char	*size = ls_n2s_rformat(file->s_stat.st_blocks, len, ' ');
-
-	start = ls_strcat(start, size);
-	start = ls_strcat(start, " ");
-	free((void *)size);
+	if (g_flags.custom_flags & CUSTM_S_)
+	{
+		start = ls_n2s_rformat(file->s_stat.st_blocks, len, ' ', start);
+		start = ls_strcat(start, " ");
+	}
 	return (start);
 }
 

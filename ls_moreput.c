@@ -6,13 +6,13 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 11:47:30 by hgranule          #+#    #+#             */
-/*   Updated: 2019/06/07 17:22:24 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/09 16:08:52 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls_inc.h"
 
-char		*ls_cattypesym(char *start, t_fileinfo *file)
+char					*ls_cattypesym(char *start, t_fileinfo *file)
 {
 	if (g_flags.custom_flags & CUSTM_FB)
 	{
@@ -32,7 +32,21 @@ char		*ls_cattypesym(char *start, t_fileinfo *file)
 	return (start);
 }
 
-void		ls_long_init_f(struct s_lcol_f *f)
+static inline void		ls_long_post_init_f(struct s_lcol_f *f)
+{
+	if (g_flags.custom_flags & CUSTM_S_)
+		f->bmax = ls_get_decs(f->bmax);
+	else
+		f->bmax = 0;
+	if (g_flags.custom_flags & CUSTM_I_)
+		f->imax = ls_get_decs(f->imax);
+	else
+		f->imax = 0;
+	f->smax = ls_get_decs(f->smax);
+	f->lmax = ls_get_decs(f->lmax);
+}
+
+void					ls_long_init_f(struct s_lcol_f *f)
 {
 	t_dlist			*put;
 	struct passwd	*pass;
@@ -47,21 +61,16 @@ void		ls_long_init_f(struct s_lcol_f *f)
 		fl = put->content;
 		pass = getpwuid(fl->s_stat.st_uid);
 		grp = getgrgid(fl->s_stat.st_gid);
-		fl->s_stat.st_blocks > f->bmax ? f->bmax = fl->s_stat.st_blocks : 0;
-		fl->s_stat.st_ino > f->imax ? f->imax = fl->s_stat.st_ino : 0;
+		(int)fl->s_stat.st_blocks > f->bmax ? f->bmax = fl->s_stat.st_blocks : 0;
+		(int)fl->s_stat.st_ino > f->imax ? f->imax = fl->s_stat.st_ino : 0;
 		len = ft_strlen(pass->pw_name);
-		len > f->umax ? f->umax = len : 0;
+		(int)len > f->umax ? f->umax = len : 0;
 		len = ft_strlen(grp->gr_name);
-		len > f->gmax ? f->gmax = len : 0;
-		fl->s_stat.st_size > f->smax ? f->smax = fl->s_stat.st_size : 0;
+		(int)len > f->gmax ? f->gmax = len : 0;
+		(int)fl->s_stat.st_size > f->smax ? f->smax = fl->s_stat.st_size : 0;
+		(int)fl->s_stat.st_nlink > f->lmax ? f->lmax = fl->s_stat.st_nlink : 0;
 		f->total += fl->s_stat.st_blocks;
 		put = put->next;
 	}
-}
-// ПРОДОЛЖАЕМ ДЕЛАТЬ КЛАССНЫЕ ШТУКИ РЕБЯТА.
-// СОЗДАЕМ КЛАССНУЮ ХУЙНЮ тут все структруы, короче Димас,
-// РАЗБЕРЕШЬСЯ
-void		ls_long_post_init_f(struct s_lcol_f *f)
-{
-	
+	ls_long_post_init_f(f);
 }

@@ -6,7 +6,7 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 01:49:37 by hgranule          #+#    #+#             */
-/*   Updated: 2019/06/07 16:15:42 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/09 15:22:52 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ static void		ls_apply_flag(const char flag, int off)
 	else if (flag == 'i' || flag == 's' || flag == 'G' || flag == 'F' \
 	|| flag == 'L' || flag == 'A' || flag == 'a')
 		g_flags.custom_flags |= g_applyv[off];
+	if (flag == 'g')
+		g_flags.view_flags = DRW_LCOL;
 }
 
 static void		ls_flag_parser(const char *str_flag)
