@@ -6,7 +6,7 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 11:47:43 by hgranule          #+#    #+#             */
-/*   Updated: 2019/06/08 21:27:16 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/11 00:08:27 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int						main(const int ac, const char **av)
 	{
 		ls_sort_files();
 		ls_putfiles();
+		g_args ? ft_putstr("\n") : 0;
 	}
 	while (g_args)
 		ls_mainloop();

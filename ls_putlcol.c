@@ -6,7 +6,7 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 02:58:28 by hgranule          #+#    #+#             */
-/*   Updated: 2019/06/09 16:33:29 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/11 03:29:09 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,9 @@ char			*ls_cataccess(char *st, t_fileinfo *file)
 	acs_rts & S_ISUID ? st[3] = 's' : 0;
 	acs_rts & S_ISGID ? st[6] = 's' : 0;
 	acs_rts & S_ISVTX ? st[9] = 't' : 0;
-
 	st[10] = ' ';
 	file->isacl ? st[10] = '+' : 0;
-	file->isxattr ? st[10] = '@' : 0;
+	file->isxattr > 0 ? st[10] = '@' : 0;
 	st[11] = ' ';
 	return(st + 12);
 }
@@ -99,11 +98,10 @@ inline char		*ls_putfile_lcol(char *st, t_fileinfo *fl, struct s_lcol_f *f)
 	st = ls_catbsz(f->bmax, st, fl);
 	st = ls_cataccess(st, fl);
 	st = ls_catnlinks(f->lmax, st, fl->s_stat.st_nlink);
-	if (g_flags.addlf_flags != ADDLF_G_)
-		st = ls_strcat_lfrt(st, f->umax + 2, ' ', \
-		getpwuid(fl->s_stat.st_uid)->pw_name);
-	st = ls_strcat_lfrt(st, f->gmax + 2, ' ', \
-	getgrgid(fl->s_stat.st_gid)->gr_name);
+	g_flags.addlf_flags & ADDLF_G_ ? 0 : (st = ls_strcat_lfrt \
+	(st, f->umax + 2, ' ', getpwuid(fl->s_stat.st_uid)->pw_name));
+	g_flags.addlf_flags & ADDLF_O_ ? 0 : (st = ls_strcat_lfrt \
+	(st, f->gmax + 2, ' ', getgrgid(fl->s_stat.st_gid)->gr_name));
 	st = ls_catbytes(st, f->smax, fl);
 	st = ls_cattime(st, fl);
 	st = ls_catcolor(st, fl);
@@ -112,19 +110,9 @@ inline char		*ls_putfile_lcol(char *st, t_fileinfo *fl, struct s_lcol_f *f)
 	st = ls_cattypesym(st, fl);
 	st = ls_catlinkinfo(st, fl);
 	st = ls_strcat(st, "\n");
+	(g_flags.addlf_flags & ADDLF_AA) && (fl->isxattr > 0) ?\
+		(st = ls_catxattr(st, fl)) : 0;
+	(g_flags.addlf_flags & ADDLF_E_) && (fl->isacl) ?\
+		(st = ls_catacl(st, fl)) : 0;
 	return (st);
 }
-
-/*
-
-Привет Дима из будущего, я сделал много нового, но и наворотил больше вопросов и проблем.
-Наш лс отлично бегает по всей файловой системе с флагами  -l и -1, но остался последний враг,
-Это флажок -m!
-
-Тебе бы в первую очередь разобраться с xattr и acl. НЕплохо было бы для общего развития
-почитать книжку по ЮНИКСУ и задуматься. Ну ты давай и про мажоры и миноры и может ты их
-даже сделаешь, я не то что бы сильно верю, мне жалко тебя.
-
-Крепись Димка
-
- */

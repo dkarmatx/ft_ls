@@ -6,7 +6,7 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/02 10:37:01 by hgranule          #+#    #+#             */
-/*   Updated: 2019/06/09 13:19:53 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/11 04:37:05 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,7 @@ char		*ls_strcat_lfrt(char *st, int len, char filler, char *str);
 char		*ls_catbytes(char *st, int maxl, t_fileinfo *fl);
 char		*ls_cattime(char *st, t_fileinfo *fl);
 char		*ls_catlinkinfo(char *st, t_fileinfo *fl);
+char		*ls_catxattr(char *st, t_fileinfo *fl);
+char		*ls_catacl(char *st, t_fileinfo *fl);
 
 #endif

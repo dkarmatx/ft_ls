@@ -6,20 +6,20 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 01:49:37 by hgranule          #+#    #+#             */
-/*   Updated: 2019/06/09 15:22:52 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/10 23:45:34 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls_inc.h"
 
-const char		g_applyf[] = "1lCRdrtufSe@ghGFLAais";
+const char		g_applyf[] = "1lCRdrtufSe@ghGFLAaiso";
 const t_2b		g_applyv[] = {
 	DRW_1COL, DRW_LCOL, DRW_MCOL, RECUR_LS,
 	DIR_ASFI, SORTI_R_, SORTI_T_, SORTI_U_,
 	SORTI_F_, SORTI_SB, ADDLF_E_, ADDLF_AA,
 	ADDLF_G_, ADDLF_H_,	CUSTM_GB, CUSTM_FB,
 	CUSTM_LB, CUSTM_AB,	CUSTM_A_, CUSTM_I_,
-	CUSTM_S_ };
+	CUSTM_S_, ADDLF_O_ };
 
 static void		ls_apply_flag(const char flag, int off)
 {
@@ -31,12 +31,12 @@ static void		ls_apply_flag(const char flag, int off)
 	|| flag == 'S')
 		g_flags.sort_flags |= g_applyv[off];
 	else if (flag == 'e' || flag == '@' || flag == 'g' \
-	|| flag == 'h')
+	|| flag == 'h' || flag == 'o')
 		g_flags.addlf_flags |= g_applyv[off];
 	else if (flag == 'i' || flag == 's' || flag == 'G' || flag == 'F' \
 	|| flag == 'L' || flag == 'A' || flag == 'a')
 		g_flags.custom_flags |= g_applyv[off];
-	if (flag == 'g')
+	if (flag == 'g' || flag == 'o')
 		g_flags.view_flags = DRW_LCOL;
 }
 
