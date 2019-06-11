@@ -6,7 +6,7 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 01:49:27 by hgranule          #+#    #+#             */
-/*   Updated: 2019/06/09 15:21:14 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/11 13:13:32 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void			ls_putfiles_1col(void)
 		tmp = ls_catbsz(frmt.bmax, tmp, (t_fileinfo *)put->content);
 		tmp = ls_catcolor(tmp, (t_fileinfo *)put->content);
 		tmp = ls_strcat(tmp, ((t_fileinfo *)put->content)->filename);
-		g_flags.custom_flags & CUSTM_GB ? (tmp = ls_strcat(tmp, "\033[0m")) : 0;
+		g_flags.ctm_flgs & CUSTM_GB ? (tmp = ls_strcat(tmp, "\033[0m")) : 0;
 		tmp = ls_cattypesym(tmp, (t_fileinfo *)put->content);
 		tmp = ls_strcat(tmp, "\n");
 		put = put->next;
@@ -54,6 +54,29 @@ static void			ls_putfiles_1col(void)
 
 static void			ls_putfiles_mcol(void)
 {
+	t_dlist				*put;
+	char				*tmp;
+	char				buff[1024 * 1024 * 2];
+	struct s_mcol_f		frmt;
+	t_dlist				**array;
+
+	ls_multi_init_f(&frmt);
+	put = g_files;
+	buff[0] = '\0';
+	tmp = buff;
+	tmp = ls_cattotal(tmp, frmt.total);
+	array = (t_dlist **)malloc(sizeof(t_dlist *) * (frmt.count + 1));
+	while (put)
+	{
+		*array = put;
+		put = put->next;
+		++array;
+	}
+	*array = 0;
+	array -= frmt.count;
+	ls_putarray_mcl(array, &frmt, tmp);
+	free(array);
+	ft_putstr(buff);
 }
 
 static void			ls_putfiles_lcol(void)
@@ -85,8 +108,3 @@ void				ls_putfiles(void)
 	else if (g_flags.view_flags == DRW_LCOL)
 		ls_putfiles_lcol();
 }
- 
-/*
-** inode  bs  access   lns  uid      gid   bytes data          name
-** 837165 8 -rw-r--r--_ 1 hgranule  2019   975B 28 May 14:27 ft_toupper.c
-*/

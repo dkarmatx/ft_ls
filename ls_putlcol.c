@@ -6,7 +6,7 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 02:58:28 by hgranule          #+#    #+#             */
-/*   Updated: 2019/06/11 03:29:09 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/11 13:28:32 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char			*ls_cataccess(char *st, t_fileinfo *file)
 	file->isacl ? st[10] = '+' : 0;
 	file->isxattr > 0 ? st[10] = '@' : 0;
 	st[11] = ' ';
-	return(st + 12);
+	return (st + 12);
 }
 
 static char		*ls_catdouble(char *st, size_t sz)
@@ -69,27 +69,25 @@ char			*ls_catnlinks(int len, char *st, int nlinks)
 	return (st);
 }
 
-char			*ls_catbytes(char *st, int maxl, t_fileinfo *fl)
+char			*ls_catbytes(char *s, int m, t_fileinfo *fl)
 {
 	const char		*b[5] = {"K", "M", "G", "T", "P"};
 	int				rad;
 	size_t			sz;
-	double			sz_d;
 
 	if (!(g_flags.addlf_flags & ADDLF_H_))
-		return (ls_strcat(ls_n2s_rformat \
-		(fl->s_stat.st_size, maxl, ' ', st), " "));
+		return (ls_strcat(ls_n2s_rformat(fl->s_stat.st_size, m, 32, s), " "));
 	if ((sz = fl->s_stat.st_size) < 1000)
-		return (ls_strcat(ls_n2s_rformat(sz, 4, ' ', st), "B "));
+		return (ls_strcat(ls_n2s_rformat(sz, 4, ' ', s), "B "));
 	rad = 0;
 	while (sz >= 1024000)
 	{
 		++rad;
 		sz /= 1024;
 	}
-	st = ls_catdouble(st, sz);
-	st = ls_strcat(st, b[rad]);
-	return (ls_strcat(st, " "));
+	s = ls_catdouble(s, sz);
+	s = ls_strcat(s, b[rad]);
+	return (ls_strcat(s, " "));
 }
 
 inline char		*ls_putfile_lcol(char *st, t_fileinfo *fl, struct s_lcol_f *f)
@@ -98,15 +96,15 @@ inline char		*ls_putfile_lcol(char *st, t_fileinfo *fl, struct s_lcol_f *f)
 	st = ls_catbsz(f->bmax, st, fl);
 	st = ls_cataccess(st, fl);
 	st = ls_catnlinks(f->lmax, st, fl->s_stat.st_nlink);
-	g_flags.addlf_flags & ADDLF_G_ ? 0 : (st = ls_strcat_lfrt \
-	(st, f->umax + 2, ' ', getpwuid(fl->s_stat.st_uid)->pw_name));
-	g_flags.addlf_flags & ADDLF_O_ ? 0 : (st = ls_strcat_lfrt \
-	(st, f->gmax + 2, ' ', getgrgid(fl->s_stat.st_gid)->gr_name));
+	g_flags.addlf_flags & ADDLF_G_ ? 0 : (st = ls_strcat_lfrt(st, \
+	f->umax + 2, ' ', getpwuid(fl->s_stat.st_uid)->pw_name));
+	g_flags.addlf_flags & ADDLF_O_ ? 0 : (st = ls_strcat_lfrt(st, \
+	f->gmax + 2, ' ', getgrgid(fl->s_stat.st_gid)->gr_name));
 	st = ls_catbytes(st, f->smax, fl);
 	st = ls_cattime(st, fl);
 	st = ls_catcolor(st, fl);
 	st = ls_strcat(st, fl->filename);
-	g_flags.custom_flags & CUSTM_GB ? (st = ls_strcat(st, "\033[0m")) : 0;
+	g_flags.ctm_flgs & CUSTM_GB ? (st = ls_strcat(st, "\033[0m")) : 0;
 	st = ls_cattypesym(st, fl);
 	st = ls_catlinkinfo(st, fl);
 	st = ls_strcat(st, "\n");

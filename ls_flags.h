@@ -6,7 +6,7 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 16:46:35 by hgranule          #+#    #+#             */
-/*   Updated: 2019/06/10 23:43:18 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/11 13:10:48 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct			s_inputflags
 {
 	t_2b	sort_flags;
 	t_2b	addlf_flags;
-	t_2b	custom_flags;
+	t_2b	ctm_flgs;
 	t_1b	general_flags;
 	t_1b	view_flags;
 }						t_flags;

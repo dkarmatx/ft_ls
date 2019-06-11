@@ -5,7 +5,7 @@ debug:
 	gcc -I libft/includes *.c libft/srcs/*.c -g
 
 bin:
-	gcc -I libft/includes *.c libft/srcs/*.c -o /Users/hgranule/bin/ft_ls
+	gcc -I libft/includes *.c libft/srcs/*.c -Wall -Werror -Wextra -o /Users/hgranule/bin/ft_ls
 
 clean_bin:
 	rm -rf /Users/hgranule/bin/ft_ls

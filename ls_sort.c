@@ -6,11 +6,23 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/07 05:40:05 by hgranule          #+#    #+#             */
-/*   Updated: 2019/06/10 23:54:03 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/11 13:34:20 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls_inc.h"
+
+static void	spasibo_norminettete(void)
+{
+	ft_dlst_gnsort(&g_args, &ls_cmp_lex);
+	if (g_flags.sort_flags & SORTI_SB)
+		ft_dlst_gnsort(&g_args, &ls_cmp_size);
+	else if ((g_flags.sort_flags & SORTI_T_) && \
+	!(g_flags.sort_flags & SORTI_U_))
+		ft_dlst_gnsort(&g_args, &ls_cmp_mtime);
+	else if (g_flags.sort_flags & SORTI_U_)
+		ft_dlst_gnsort(&g_args, &ls_cmp_atime);
+}
 
 void		ls_sort_arguments(void)
 {
@@ -18,14 +30,7 @@ void		ls_sort_arguments(void)
 	{
 		if (g_flags.sort_flags & SORTI_R_)
 		{
-			ft_dlst_gnsort(&g_args, &ls_cmp_lex);
-			if (g_flags.sort_flags & SORTI_SB)
-				ft_dlst_gnsort(&g_args, &ls_cmp_size);
-			else if ((g_flags.sort_flags & SORTI_T_) && \
-				!(g_flags.sort_flags & SORTI_U_))
-				ft_dlst_gnsort(&g_args, &ls_cmp_mtime);
-			else if (g_flags.sort_flags & SORTI_U_)
-				ft_dlst_gnsort(&g_args, &ls_cmp_atime);
+			spasibo_norminettete();
 		}
 		else
 		{

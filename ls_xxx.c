@@ -6,7 +6,7 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/10 22:43:07 by hgranule          #+#    #+#             */
-/*   Updated: 2019/06/11 04:29:41 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/11 13:30:18 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char					*ls_catxattr(char *st, t_fileinfo *fl)
 		it = ft_memchr(it, 0, klen);
 		++it;
 		if ((it - keys) == klen)
-			break;
+			break ;
 	}
 	return (st);
 }
@@ -63,15 +63,13 @@ ssize_t vlen, int *ko)
 		it[0] = ft_memchr(it[1], '\n', vlen) + 1;
 		*st = 0;
 		if (it[0][0] == 0)
-			break;
+			return (st);
 	}
-	return (st);
 }
 
 char					*ls_catacl(char *st, t_fileinfo *fl)
 {
 	char		*acl_text;
-	char		*it[2];
 	acl_t		acl;
 	ssize_t		vlen;
 	int			ko;
@@ -83,18 +81,3 @@ char					*ls_catacl(char *st, t_fileinfo *fl)
 	acl_free((void *)acl);
 	return (st);
 }
-
-/*
-char			*ls_catxattracl(char *st, t_fileinfo *fl)
-{
-	if (g_flags.addlf_flags == ADDLF_AA && fl->isxattr)
-	{
-		st = ls_catxattr(st, fl);
-	}
-	if (g_flags.addlf_flags == ADDLF_E_ && fl->isacl)
-	{
-		st = ls_catacl(st, fl);
-	}
-	return (st);
-}
-*/

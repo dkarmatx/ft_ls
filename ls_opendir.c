@@ -6,7 +6,7 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 09:22:45 by hgranule          #+#    #+#             */
-/*   Updated: 2019/06/07 09:01:38 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/11 13:10:48 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ struct dirent *cur_f, char *path)
 		ft_strcat(finfo.path, "/");
 	ft_strcat(finfo.path, cur_f->d_name);
 	ls_get_fileinfo(&finfo, cur_f->d_name, finfo.path);
-	if (!(g_flags.custom_flags & (CUSTM_A_ | CUSTM_AB)) && \
+	if (!(g_flags.ctm_flgs & (CUSTM_A_ | CUSTM_AB)) && \
 	finfo.filename[0] == '.')
 		return ;
-	if (!(g_flags.custom_flags & CUSTM_A_) && \
+	if (!(g_flags.ctm_flgs & CUSTM_A_) && \
 	(!ft_strcmp(finfo.filename, ".") || !ft_strcmp(finfo.filename, "..")))
 		return ;
 	ft_dlstpush(files, ft_dlstnew(&finfo, sizeof(t_fileinfo)));

@@ -6,7 +6,7 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/09 09:19:36 by hgranule          #+#    #+#             */
-/*   Updated: 2019/06/11 04:35:07 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/11 12:54:10 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static char	*ls_cat_oldtime(char *st, time_t tm)
 	st[0] = time_buff[4];
 	st[1] = time_buff[5];
 	st[2] = time_buff[6];
-	st[3]= ' ';
+	st[3] = ' ';
 	st[7] = ' ';
 	st[8] = time_buff[20];
 	st[9] = time_buff[21];
@@ -45,7 +45,7 @@ static char	*ls_cat_newtime(char *st, time_t tm)
 	st[0] = time_buff[4];
 	st[1] = time_buff[5];
 	st[2] = time_buff[6];
-	st[3]= ' ';
+	st[3] = ' ';
 	st[7] = time_buff[11];
 	st[8] = time_buff[12];
 	st[9] = ':';
