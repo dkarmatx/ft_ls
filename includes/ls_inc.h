@@ -6,7 +6,7 @@
 /*   By: hgranule <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 21:31:48 by hgranule          #+#    #+#             */
-/*   Updated: 2019/06/11 12:39:50 by hgranule         ###   ########.fr       */
+/*   Updated: 2019/06/11 14:09:53 by hgranule         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # include <errno.h>
 # include <sys/ioctl.h>
 
-# include "libft/includes/libft.h"
+# include "libft.h"
 # include "ls_flags.h"
 # include "ls_input.h"
 # include "ls_error.h"
